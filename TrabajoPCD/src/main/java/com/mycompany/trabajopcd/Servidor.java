@@ -1,5 +1,6 @@
 package com.mycompany.trabajopcd;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
@@ -7,6 +8,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
@@ -24,30 +26,34 @@ public class Servidor {
     private static List<Jugador> jugadores = Collections.synchronizedList(new ArrayList<>());
     private static List<Ficha> fichas = Collections.synchronizedList(new ArrayList<>());
     private static List<Casa> casas = Collections.synchronizedList(new ArrayList<>());
-    private static Set<PrintWriter> writers = new CopyOnWriteArraySet<>();
+    
+    private static List<Socket> sockets = Collections.synchronizedList(new ArrayList<>());
+    private static List<PrintWriter> writers = Collections.synchronizedList(new ArrayList<>());
+    private static List<Scanner> readers = Collections.synchronizedList(new ArrayList<>());
+    private Color[] colores = {Color.AMARILLO, Color.AZUL, Color.ROJO, Color.VERDE};
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         
-        Tablero tablero = new Tablero();
-        Dado dados = new Dado();
-
-        List<Color> colores = new ArrayList<>();
-        for (Color color : Color.values()) {
-            colores.add(color);
-        }
-        List<Socket> sockets = new ArrayList<>(); //lista para almacenar los sockets de los jugadores
-        
         try{
             ServerSocket serversocket = new ServerSocket(44444);
-            Thread hiloJuego = new Thread(new HiloJuego());
+            Thread hiloJuego = new Thread(new HiloJuego(serversocket));
             hiloJuego.start();
+            hiloJuego.join();
         }catch (IOException e) {
             System.err.println("IOException. Mensaje: " + e.getMessage());
             e.printStackTrace();
             System.exit(1);
+        }catch (InterruptedException ex) {
+            System.err.println("InterruptedException. Mensaje: " + ex.getMessage());
+            ex.printStackTrace();
+            System.exit(1);
+        }
+        
+        for (int i=0; i<jugadores.size(); i++){
+            System.out.println(jugadores.get(i));
         }
         
     }
@@ -76,13 +82,44 @@ public class Servidor {
         Servidor.casas = casas;
     }
 
-    public static Set<PrintWriter> getWriters() {
+    
+    public static List<Socket> getSockets() {
+        return sockets;
+    }
+
+    public static void setSockets(List<Socket> sockets) {
+        Servidor.sockets = sockets;
+    }
+
+    
+
+    public Color[] getColores() {
+        return colores;
+    }
+
+    public void setColores(Color[] colores) {
+        this.colores = colores;
+    }
+
+    public static List<PrintWriter> getWriters() {
         return writers;
     }
 
-    public static void setWriters(Set<PrintWriter> writers) {
+    public static void setWriters(List<PrintWriter> writers) {
         Servidor.writers = writers;
     }
+
+    public static List<Scanner> getReaders() {
+        return readers;
+    }
+
+    public static void setReaders(List<Scanner> readers) {
+        Servidor.readers = readers;
+    }
+
+    
+
+    
     
     
     
