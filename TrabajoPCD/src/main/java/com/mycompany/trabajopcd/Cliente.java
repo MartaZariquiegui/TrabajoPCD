@@ -28,8 +28,8 @@ public class Cliente {
             Socket socket = new Socket("127.0.0.1", 44444);
             Scanner sc = new Scanner(System.in);
             
-            Scanner shilo = new Scanner(socket.getInputStream());
-            PrintWriter pw = new PrintWriter(socket.getOutputStream(),true);
+            Scanner shilo = new Scanner(new InputStreamReader(socket.getInputStream()));
+            PrintWriter pw = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()),true);
 
             System.out.print("Introduce tu nombre: ");
             String nombre = sc.nextLine();
