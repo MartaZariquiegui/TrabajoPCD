@@ -43,6 +43,7 @@ public class Servidor {
         try{
             ServerSocket serversocket = new ServerSocket(44444);
             Thread hiloJuego = new Thread(new HiloJuego());
+            hiloJuego.start();
         }catch (IOException e) {
             System.err.println("IOException. Mensaje: " + e.getMessage());
             e.printStackTrace();
@@ -50,5 +51,39 @@ public class Servidor {
         }
         
     }
+
+    public static List<Jugador> getJugadores() {
+        return jugadores;
+    }
+
+    public static void setJugadores(List<Jugador> jugadores) {
+        Servidor.jugadores = jugadores;
+    }
+
+    public static List<Ficha> getFichas() {
+        return fichas;
+    }
+
+    public static void setFichas(List<Ficha> fichas) {
+        Servidor.fichas = fichas;
+    }
+
+    public static List<Casa> getCasas() {
+        return casas;
+    }
+
+    public static void setCasas(List<Casa> casas) {
+        Servidor.casas = casas;
+    }
+
+    public static Set<PrintWriter> getWriters() {
+        return writers;
+    }
+
+    public static void setWriters(Set<PrintWriter> writers) {
+        Servidor.writers = writers;
+    }
+    
+    
     
 }
