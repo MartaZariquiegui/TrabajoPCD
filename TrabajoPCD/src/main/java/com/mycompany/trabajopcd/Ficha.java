@@ -81,7 +81,9 @@ public class Ficha {
     public void setPosPasillo(int posPasillo) {
         this.posPasillo = posPasillo;
     }
-
+    
+    //Creo que no la utilizamos y se puede borrar
+    /*
     public Ficha getFichaDeCasilla(int casillaOcupada) {
         Ficha fichaAux = null;
         if (tablero.getEstadoCasilla(casillaOcupada) == 1) {
@@ -97,7 +99,8 @@ public class Ficha {
             }
         }
         return fichaAux;
-    }
+    }*/
+    
 
     public void sacarFichaDeCasa(int numJugador) {
         enCasa = false;
@@ -169,7 +172,7 @@ public class Ficha {
             System.out.println("¡Enhorabuena jugador " + jugador.getNombre() + " has ganado!");
         } else if (estaPasillo && posPasillo < 8) {
             System.out.println(jugador.getNombre() + " te faltan " + (8 - posPasillo) + " casillas para ganar");
-        } else {
+        } else { //NO es mejor poner directmente mostrarDatos() ???
             for (PrintWriter writer : Servidor.getWriters()) {
                 writer.println("Color: " + getColor());
             }
@@ -254,12 +257,12 @@ public class Ficha {
                 }
             }
         }
-        if ((Servidor.getCasas().get(i).casaVacia()) && (tirada != 0)) {
+        if ((Servidor.getCasas().get(i).casaVacia()) && (tirada != 0)) { //Aqui no seria if else ?? o else?? pq lo de ir a casa cuando la tirada es 0 ya lo incluimos en moverFicha
             Servidor.getFichas().get(i).moverFicha(jugador, Servidor.getFichas().get(i).getCasilla(), tirada, Servidor.getFichas().get(i).getPosPasillo());
         }
         for (PrintWriter writer : Servidor.getWriters()) {
             writer.println();
-            writer.println("Siguiente ronda");
+            writer.println("Siguiente turno");
         }
     }
 

@@ -40,6 +40,8 @@ public class Tablero {
         return seguro;
     }
     
+    //Creo que no la utilizamos y se puede quitar
+    /*
     public Ficha getFichaDeCasilla(int casillaOcupada) {
         Ficha fichaAux = null;
         //Ya habremos comprobado antes que es esa casilla hay una unica ficha, porque es para la funcion comerFicha
@@ -49,10 +51,11 @@ public class Tablero {
                 fichaAux.setCasilla(casillaOcupada);
                 fichaAux.setComible(true);
                 fichaAux.setEnCasa(false);
+                break;
             }
         }
         return fichaAux;
-    }
+    }*/
     
     public boolean comerFichaTablero(int posicionFinal) {
         boolean comer = false;

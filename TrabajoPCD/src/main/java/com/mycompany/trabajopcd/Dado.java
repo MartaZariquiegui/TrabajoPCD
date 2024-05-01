@@ -32,7 +32,7 @@ public class Dado {
                 puedeSalir = true;
             }
             for (PrintWriter writer : Servidor.getWriters()) {
-                writer.println("En el dado 1 tenemos el numero: " + numeros[0] + " y en el dado 2 el numero: " + numeros[1]);
+                writer.println("En el dado 1 tenemos el numero: " + numeros[0] + ", y en el dado 2 el numero: " + numeros[1]);
             }
             if (numeros[0] != numeros[1]) {
                 return posiciones;

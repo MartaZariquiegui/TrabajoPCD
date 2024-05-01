@@ -38,30 +38,6 @@ public class HiloJuego implements Runnable {
         Tablero tablero = new Tablero();
 
         try {
-            //ana
-//            in = new Scanner(socket.getInputStream());
-//            out = new PrintWriter(socket.getOutputStream(), true);
-//            for(int i=0; i<4; i++) {
-//                out.println("SUBMITNAME");
-//                name = in.nextLine();
-//                Jugador jugador = new Jugador(name, i);
-//                if (name == null) {
-//                    return;
-//                }
-//                synchronized (Servidor.getJugadores()) {
-//                    if (!name.isBlank() && !Servidor.getJugadores().contains(jugador)) {
-//                        Servidor.getJugadores().add(jugador);
-//                        break;
-//                    }
-//                }
-//            }
-//            // Ya se ha incorporado un nuevo usuario, lo añadimos al conjunto de
-//            // nombre. Pero antes de añadirlo mandamos un mensaje a todos los usuarios
-//            // que un nuevo usuario se ha añadido al sistema
-//            out.println("NAMEACCEPTED " + name);
-//            for (PrintWriter writer : Servidor.getWriters()) {
-//                writer.println("MESSAGE " + name + " has joined");
-//            }
 
             for (int i = 0; i < 4; i++) {
                 Socket SJugador = socket.accept();

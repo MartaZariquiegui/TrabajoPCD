@@ -33,38 +33,12 @@ public class Cliente {
             Scanner schilo = new Scanner(socket.getInputStream());
             PrintWriter pw = new PrintWriter(socket.getOutputStream(), true);
 
-//            //ana
-//            BufferedReader entradaSocket = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-//            PrintWriter salidaSocket = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
-//            BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
-//            
-//            while (true) {
-//                String recibido = entradaSocket.readLine();
-//                if (recibido.startsWith("NAMEACCEPTED")) {
-//                    break;
-//                } else {
-//                    System.out.print("Introduce tu nombre: ");
-//                    String nombre = teclado.readLine();
-//                    salidaSocket.println(nombre);
-//                }
-//            }
             String recibido = schilo.nextLine();
             System.out.print(recibido);
             String nombre = sc.nextLine();
             pw.println(nombre);
 
-            //crear un hilo para manejar los mensajes que llegan del grupo
-//            Thread hiloRecepcion = new Thread(new RecepcionMensajes(socket));
-//            hiloRecepcion.start();
-
-
-//            //ana
-//            while(true){
-//                System.out.println("Es tu turno. Tira los dado pulsando ENTER");
-//                teclado.readLine();
-//                int tirada = dado.tirada();
-//                salidaSocket.println(tirada);
-//            }
+            
             while ((recibido = schilo.nextLine()) != null) {
                 System.out.println(recibido);
                 if (recibido.equals(Servidor.getSolicitarDados())) {
