@@ -39,6 +39,7 @@ public class Servidor {
         
         try{
             ServerSocket serversocket = new ServerSocket(44444);
+            System.out.println("Se ha iniciado el servidor");
             Thread hiloJuego = new Thread(new HiloJuego(serversocket));
             hiloJuego.start();
             hiloJuego.join();

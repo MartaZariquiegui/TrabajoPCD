@@ -37,6 +37,7 @@ public class HiloJuego implements Runnable {
                 PrintWriter out = new PrintWriter(new OutputStreamWriter(SJugador.getOutputStream()), true);
                 Servidor.getWriters().add(out);
 
+                out.println("Introduce tu nombre: ");
                 String nombre = in.nextLine();
                 int num = i + 1;
                 Jugador jugador = new Jugador(nombre, num);
@@ -52,8 +53,9 @@ public class HiloJuego implements Runnable {
                     for (PrintWriter writer : Servidor.getWriters()) {
                         writer.println("Es el turno de " + jugador.getNombre());
                     }
-                    Servidor.getWriters().get(i).print("Pulse enter para tirar los dados: ");
-                    int tirada = Servidor.getReaders().get(i).nextInt();
+                    Servidor.getWriters().get(i).println("Pulse enter para tirar los dados: ");
+                    Servidor.getReaders().get(i).nextLine();
+                    int tirada = new Dado().tirada();
                     for (PrintWriter writer : Servidor.getWriters()) {
                         writer.println(jugador.getNombre() + " avanza " + tirada + " casillas.");
                     }

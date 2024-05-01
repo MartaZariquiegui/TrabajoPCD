@@ -26,12 +26,13 @@ public class Cliente {
     public static void main(String[] args) {
         try{
             Socket socket = new Socket("127.0.0.1", 44444);
-            Scanner sc = new Scanner(System.in);
+            Scanner sc = new Scanner(new InputStreamReader(System.in));
             
-            Scanner shilo = new Scanner(new InputStreamReader(socket.getInputStream()));
-            PrintWriter pw = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()),true);
+            Scanner schilo = new Scanner(socket.getInputStream());
+            PrintWriter pw = new PrintWriter(socket.getOutputStream(),true);
 
-            System.out.print("Introduce tu nombre: ");
+            String recibido = schilo.nextLine();
+            System.out.print(recibido);
             String nombre = sc.nextLine();
             pw.println(nombre);
             
@@ -40,11 +41,12 @@ public class Cliente {
             hiloRecepcion.start();
             
             while(true){
-                String recibido = shilo.nextLine();
+                recibido = schilo.nextLine();
                 System.out.println(recibido);
                 String salto = sc.nextLine();
-                int tirada = dado.tirada();
-                pw.write(tirada);
+                pw.println(salto);
+//                int tirada = dado.tirada();
+//                pw.write(tirada);
             }
             
         }catch(IOException e){
