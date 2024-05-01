@@ -17,23 +17,22 @@ import java.util.Scanner;
  * @author martazariquiegui
  */
 public class Cliente {
-    
+
     private static Dado dado = new Dado();
     private static final String SERVER_ADDRESS = "127.0.0.1";
     private static final int SERVER_PORT = 44444;
-
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        try{
+        try {
             Socket socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
             Scanner sc = new Scanner(new InputStreamReader(System.in));
-            
+
             Scanner schilo = new Scanner(socket.getInputStream());
-            PrintWriter pw = new PrintWriter(socket.getOutputStream(),true);
-            
+            PrintWriter pw = new PrintWriter(socket.getOutputStream(), true);
+
 //            //ana
 //            BufferedReader entradaSocket = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 //            PrintWriter salidaSocket = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
@@ -49,16 +48,16 @@ public class Cliente {
 //                    salidaSocket.println(nombre);
 //                }
 //            }
-            
             String recibido = schilo.nextLine();
             System.out.print(recibido);
             String nombre = sc.nextLine();
             pw.println(nombre);
-            
+
             //crear un hilo para manejar los mensajes que llegan del grupo
-            Thread hiloRecepcion = new Thread(new RecepcionMensajes(socket));
-            hiloRecepcion.start();
-            
+//            Thread hiloRecepcion = new Thread(new RecepcionMensajes(socket));
+//            hiloRecepcion.start();
+
+
 //            //ana
 //            while(true){
 //                System.out.println("Es tu turno. Tira los dado pulsando ENTER");
@@ -66,23 +65,22 @@ public class Cliente {
 //                int tirada = dado.tirada();
 //                salidaSocket.println(tirada);
 //            }
-            
-            
-            while(true){
-                recibido = schilo.nextLine();
+            while ((recibido = schilo.nextLine()) != null) {
                 System.out.println(recibido);
-                String salto = sc.nextLine();
-                int tirada = dado.tirada();
-                pw.println(tirada);
-                pw.println(dado.isPuedeSalir());
+                if (recibido.equals(Servidor.getSolicitarDados())) {
+                    String salto = sc.nextLine();
+                    int tirada = dado.tirada();
+                    pw.println(tirada);
+                    pw.println(dado.isPuedeSalir());
+                }
             }
-            
-        }catch(IOException e){
+
+        } catch (IOException e) {
             System.err.println("IOException. Mensaje: " + e.getMessage());
             e.printStackTrace();
             System.exit(1);
         }
-        
+
     }
-    
+
 }

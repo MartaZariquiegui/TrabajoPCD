@@ -1,6 +1,5 @@
 package com.mycompany.trabajopcd;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
@@ -9,8 +8,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
-import java.util.concurrent.CopyOnWriteArraySet;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -23,6 +20,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
  */
 public class Servidor {
     
+    private static String solicitarDados = "Pulse enter para tirar los dados: ";
     private static List<Jugador> jugadores = Collections.synchronizedList(new ArrayList<>());
     private static List<Ficha> fichas = Collections.synchronizedList(new ArrayList<>());
     private static List<Casa> casas = Collections.synchronizedList(new ArrayList<>());
@@ -121,11 +119,8 @@ public class Servidor {
         Servidor.colores = colores;
     }
 
-    
-    
-
-    
-    
-    
-    
+    public static String getSolicitarDados() {
+        return solicitarDados;
+    }
+  
 }

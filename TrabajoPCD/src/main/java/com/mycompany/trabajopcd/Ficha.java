@@ -238,4 +238,29 @@ public class Ficha {
         }
     }
 
+    public void rondaJugador(Jugador jugador, boolean puedeSalir, int i, int tirada) {
+        if (Servidor.getCasas().get(i).casaVacia() == false) { //si todavia tengo que sacar la ficha de casa
+
+            if (puedeSalir == true) {
+                Servidor.getFichas().get(i).sacarFichaDeCasa(jugador.getNumero());
+                Servidor.getCasas().get(i).eliminarDeCasa(Servidor.getFichas().get(i));
+                tirada -= 5;
+                for (PrintWriter writer : Servidor.getWriters()) {
+                    writer.println(jugador.getNombre() + " ha sacado su ficha de casa.");
+                }
+            } else {
+                for (PrintWriter writer : Servidor.getWriters()) {
+                    writer.println(jugador.getNombre() + " no ha conseguido sacar su ficha de casa.");
+                }
+            }
+        }
+        if ((Servidor.getCasas().get(i).casaVacia()) && (tirada != 0)) {
+            Servidor.getFichas().get(i).moverFicha(jugador, Servidor.getFichas().get(i).getCasilla(), tirada, Servidor.getFichas().get(i).getPosPasillo());
+        }
+        for (PrintWriter writer : Servidor.getWriters()) {
+            writer.println();
+            writer.println("Siguiente ronda");
+        }
+    }
+
 }
