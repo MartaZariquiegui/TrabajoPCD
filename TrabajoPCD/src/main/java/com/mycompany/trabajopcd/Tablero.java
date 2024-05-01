@@ -61,7 +61,7 @@ public class Tablero {
                 for(int pos : posiciones.values()){
                     if (pos == posicionFinal){
                         if(!getColorDeUnaFicha(posicionFinal).equals(ficha.getColor())){
-                            ficha.mandarFichaACasa();
+                            ficha.mandarFichaACasa(ficha);
                             comer = true;
                         }
                     }

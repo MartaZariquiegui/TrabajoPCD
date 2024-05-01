@@ -146,7 +146,7 @@ public class Ficha {
 
         if (estaPasillo == false && posFinal < jugador.getLimite()) {
             if (posiciones == 0) {
-                mandarFichaACasa();//Significa que habra sacado 3 veces seguidad dados dobles.
+                mandarFichaACasa(this);//Significa que habra sacado 3 veces seguidad dados dobles.
             }
             //actualizamos el estado del tablero
             tablero.ocuparCasilla(posFinal, this); //ya actualiza la posicion del color
@@ -185,8 +185,8 @@ public class Ficha {
         }
     }
 
-    public void mandarFichaACasa() {
-        casa.meterFichaEnACasa(this);
+    public void mandarFichaACasa(Ficha ficha) {
+        casa.meterFichaEnACasa(ficha);
     }
 
     public boolean vaAComer(int posicion) {

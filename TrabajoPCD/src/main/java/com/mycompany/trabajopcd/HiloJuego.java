@@ -84,7 +84,7 @@ public class HiloJuego implements Runnable {
                 writer.println("Se han conectado los 4 jugadores. Comienza la partida");
             }
 
-            for (int j = 0; j < 5; j++) {
+            while(true) {
                 for (int i = 0; i < Servidor.getJugadores().size(); i++) {
                     Jugador jugador = Servidor.getJugadores().get(i);
                     for (PrintWriter writer : Servidor.getWriters()) {
@@ -94,7 +94,7 @@ public class HiloJuego implements Runnable {
                     String tiradastr = Servidor.getReaders().get(i).nextLine();
                     int tirada = Integer.parseInt(tiradastr);
                     for (PrintWriter writer : Servidor.getWriters()) {
-                        writer.println(jugador.getNombre() + " avanza " + tiradastr + " casillas.");
+                        writer.println(jugador.getNombre() + " avanza " + tirada + " casillas.");
                         writer.println();
                     }
                     String puedeSalirStr = Servidor.getReaders().get(i).nextLine();
@@ -115,7 +115,7 @@ public class HiloJuego implements Runnable {
                             }
                         }
                     }
-                    if (Servidor.getCasas().get(i).casaVacia()) {
+                    if ((Servidor.getCasas().get(i).casaVacia()) && (tirada!=0)) {
                         Servidor.getFichas().get(i).moverFicha(jugador, Servidor.getFichas().get(i).getCasilla(), tirada, Servidor.getFichas().get(i).getPosPasillo());
                     }
                 }
