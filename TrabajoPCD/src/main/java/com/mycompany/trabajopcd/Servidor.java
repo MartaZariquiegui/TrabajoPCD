@@ -30,17 +30,22 @@ public class Servidor {
     private static List<Socket> sockets = Collections.synchronizedList(new ArrayList<>());
     private static List<PrintWriter> writers = Collections.synchronizedList(new ArrayList<>());
     private static List<Scanner> readers = Collections.synchronizedList(new ArrayList<>());
-    private Color[] colores = {Color.AMARILLO, Color.AZUL, Color.ROJO, Color.VERDE};
-
+    private static List<Color> colores = Collections.synchronizedList(new ArrayList<>());
+   
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         
+        colores.add(Color.AMARILLO);
+        colores.add(Color.AZUL);
+        colores.add(Color.ROJO);
+        colores.add(Color.VERDE);
+        
         try{
             ServerSocket serversocket = new ServerSocket(44444);
             System.out.println("Se ha iniciado el servidor");
-            Thread hiloJuego = new Thread(new HiloJuego(serversocket.accept()));
+            Thread hiloJuego = new Thread(new HiloJuego(serversocket));
             hiloJuego.start();
             hiloJuego.join();
         }catch (IOException e) {
@@ -92,16 +97,6 @@ public class Servidor {
         Servidor.sockets = sockets;
     }
 
-    
-
-    public Color[] getColores() {
-        return colores;
-    }
-
-    public void setColores(Color[] colores) {
-        this.colores = colores;
-    }
-
     public static List<PrintWriter> getWriters() {
         return writers;
     }
@@ -118,6 +113,15 @@ public class Servidor {
         Servidor.readers = readers;
     }
 
+    public static List<Color> getColores() {
+        return colores;
+    }
+
+    public static void setColores(List<Color> colores) {
+        Servidor.colores = colores;
+    }
+
+    
     
 
     

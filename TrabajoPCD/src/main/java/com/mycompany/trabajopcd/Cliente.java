@@ -29,51 +29,53 @@ public class Cliente {
     public static void main(String[] args) {
         try{
             Socket socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
-            //Scanner sc = new Scanner(new InputStreamReader(System.in));
+            Scanner sc = new Scanner(new InputStreamReader(System.in));
             
-            //Scanner schilo = new Scanner(socket.getInputStream());
-            //PrintWriter pw = new PrintWriter(socket.getOutputStream(),true);
+            Scanner schilo = new Scanner(socket.getInputStream());
+            PrintWriter pw = new PrintWriter(socket.getOutputStream(),true);
             
-            BufferedReader entradaSocket = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            PrintWriter salidaSocket = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
-            BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
+//            //ana
+//            BufferedReader entradaSocket = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+//            PrintWriter salidaSocket = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
+//            BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
+//            
+//            while (true) {
+//                String recibido = entradaSocket.readLine();
+//                if (recibido.startsWith("NAMEACCEPTED")) {
+//                    break;
+//                } else {
+//                    System.out.print("Introduce tu nombre: ");
+//                    String nombre = teclado.readLine();
+//                    salidaSocket.println(nombre);
+//                }
+//            }
             
-            while (true) {
-                String recibido = entradaSocket.readLine();
-                if (recibido.startsWith("NAMEACCEPTED")) {
-                    break;
-                } else {
-                    System.out.print("Introduce tu nombre: ");
-                    String nombre = teclado.readLine();
-                    salidaSocket.println(nombre);
-                }
-            }
-            /*
             String recibido = schilo.nextLine();
             System.out.print(recibido);
             String nombre = sc.nextLine();
-            pw.println(nombre);*/
+            pw.println(nombre);
             
             //crear un hilo para manejar los mensajes que llegan del grupo
             Thread hiloRecepcion = new Thread(new RecepcionMensajes(socket));
             hiloRecepcion.start();
             
-            while(true){
-                System.out.println("Es tu turno. Tira los dado pulsando ENTER");
-                teclado.readLine();
-                int tirada = dado.tirada();
-                salidaSocket.println(tirada);
-            }
+//            //ana
+//            while(true){
+//                System.out.println("Es tu turno. Tira los dado pulsando ENTER");
+//                teclado.readLine();
+//                int tirada = dado.tirada();
+//                salidaSocket.println(tirada);
+//            }
             
-            /*
+            
             while(true){
                 recibido = schilo.nextLine();
                 System.out.println(recibido);
                 String salto = sc.nextLine();
-                pw.println(salto);
-//                int tirada = dado.tirada();
-//                pw.write(tirada);
-            }*/
+                int tirada = dado.tirada();
+                pw.println(tirada);
+                pw.println(dado.isPuedeSalir());
+            }
             
         }catch(IOException e){
             System.err.println("IOException. Mensaje: " + e.getMessage());
