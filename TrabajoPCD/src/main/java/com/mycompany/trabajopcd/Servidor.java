@@ -40,7 +40,7 @@ public class Servidor {
         try{
             ServerSocket serversocket = new ServerSocket(44444);
             System.out.println("Se ha iniciado el servidor");
-            Thread hiloJuego = new Thread(new HiloJuego(serversocket));
+            Thread hiloJuego = new Thread(new HiloJuego(serversocket.accept()));
             hiloJuego.start();
             hiloJuego.join();
         }catch (IOException e) {
@@ -54,7 +54,7 @@ public class Servidor {
         }
         
         for (int i=0; i<jugadores.size(); i++){
-            System.out.println(jugadores.get(i));
+            System.out.println(jugadores.get(i).toString());
         }
         
     }

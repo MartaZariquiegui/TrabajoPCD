@@ -19,27 +19,53 @@ import java.util.Scanner;
 public class Cliente {
     
     private static Dado dado = new Dado();
+    private static final String SERVER_ADDRESS = "127.0.0.1";
+    private static final int SERVER_PORT = 44444;
+
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         try{
-            Socket socket = new Socket("127.0.0.1", 44444);
-            Scanner sc = new Scanner(new InputStreamReader(System.in));
+            Socket socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
+            //Scanner sc = new Scanner(new InputStreamReader(System.in));
             
-            Scanner schilo = new Scanner(socket.getInputStream());
-            PrintWriter pw = new PrintWriter(socket.getOutputStream(),true);
-
+            //Scanner schilo = new Scanner(socket.getInputStream());
+            //PrintWriter pw = new PrintWriter(socket.getOutputStream(),true);
+            
+            BufferedReader entradaSocket = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            PrintWriter salidaSocket = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
+            BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
+            
+            while (true) {
+                String recibido = entradaSocket.readLine();
+                if (recibido.startsWith("NAMEACCEPTED")) {
+                    break;
+                } else {
+                    System.out.print("Introduce tu nombre: ");
+                    String nombre = teclado.readLine();
+                    salidaSocket.println(nombre);
+                }
+            }
+            /*
             String recibido = schilo.nextLine();
             System.out.print(recibido);
             String nombre = sc.nextLine();
-            pw.println(nombre);
+            pw.println(nombre);*/
             
             //crear un hilo para manejar los mensajes que llegan del grupo
             Thread hiloRecepcion = new Thread(new RecepcionMensajes(socket));
             hiloRecepcion.start();
             
+            while(true){
+                System.out.println("Es tu turno. Tira los dado pulsando ENTER");
+                teclado.readLine();
+                int tirada = dado.tirada();
+                salidaSocket.println(tirada);
+            }
+            
+            /*
             while(true){
                 recibido = schilo.nextLine();
                 System.out.println(recibido);
@@ -47,7 +73,7 @@ public class Cliente {
                 pw.println(salto);
 //                int tirada = dado.tirada();
 //                pw.write(tirada);
-            }
+            }*/
             
         }catch(IOException e){
             System.err.println("IOException. Mensaje: " + e.getMessage());
