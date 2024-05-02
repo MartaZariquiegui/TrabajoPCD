@@ -52,6 +52,8 @@ public class Casa {
             ficha.setCasilla(0);
             ficha.setEnCasa(true);
             ficha.setComible(false);
+            ficha.setPosAcumulada(0);
+            ficha.setEstaPasillo(false);
             numFichas++;
         }
     }

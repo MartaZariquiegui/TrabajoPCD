@@ -75,6 +75,16 @@ public class Ficha {
         this.comible = comible;
     }
 
+    public boolean isEstaPasillo() {
+        return estaPasillo;
+    }
+
+    public void setEstaPasillo(boolean estaPasillo) {
+        this.estaPasillo = estaPasillo;
+    }
+    
+    
+
     public int getPosPasillo() {
         return posPasillo;
     }
@@ -82,6 +92,16 @@ public class Ficha {
     public void setPosPasillo(int posPasillo) {
         this.posPasillo = posPasillo;
     }
+
+    public int getPosAcumulada() {
+        return posAcumulada;
+    }
+
+    public void setPosAcumulada(int posAcumulada) {
+        this.posAcumulada = posAcumulada;
+    }
+    
+    
 
     //Creo que no la utilizamos y se puede borrar
     /*
@@ -186,8 +206,8 @@ public class Ficha {
         if (estaPasillo && posPasillo >= 8) {
             for (PrintWriter writer : Servidor.getWriters()) {
                 writer.println("¡Enhorabuena jugador " + jugador.getNombre() + " has ganado!");
-                Servidor.setPartidaTerminada(true);
             }
+            Servidor.setPartidaTerminada(true);
         } else if (estaPasillo && posPasillo < 8) {
             for (PrintWriter writer : Servidor.getWriters()) {
                 writer.println(jugador.getNombre() + " te faltan " + (8 - posPasillo) + " casillas para ganar");
