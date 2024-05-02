@@ -35,9 +35,10 @@ public class Cliente {
             System.out.print(recibido);
             String nombre = sc.nextLine();
             pw.println(nombre);
-            
-            while(Servidor.isPartidaTerminada()==false){
-                while ((recibido = schilo.nextLine())!= null){
+
+            while ((Servidor.isPartidaTerminada() == false)) {
+                while (schilo.hasNextLine()) {
+                    recibido = schilo.nextLine();
                     if (recibido.equals(Servidor.getSolicitarDados())) {
                         System.out.println(recibido);
                         String salto = sc.nextLine();
@@ -48,8 +49,13 @@ public class Cliente {
                     } else {
                         System.out.println(recibido);
                     }
+                    if(Servidor.isPartidaTerminada()==true){
+                        break;
+                    }
                 }
+                break;
             }
+            sc.close();
 
         } catch (IOException e) {
             System.err.println("IOException. Mensaje: " + e.getMessage());

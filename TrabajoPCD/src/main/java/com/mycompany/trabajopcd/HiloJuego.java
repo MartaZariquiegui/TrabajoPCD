@@ -89,6 +89,7 @@ public class HiloJuego implements Runnable {
                 writer.println("Ha terminado la partida");
             }
             socket.close();
+            
 
         } catch (IOException e) {
             System.err.println("IOException. Mensaje: " + e.getMessage());
