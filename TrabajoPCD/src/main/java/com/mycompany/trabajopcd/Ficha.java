@@ -133,7 +133,7 @@ public class Ficha {
     public int nuevaPos(int posInicial, int posiciones) {
         int posicionFinal = posInicial + posiciones;
         for (int i = 1; i <= posiciones; i++) {
-            if (tablero.hayBarrera((posInicial + i) % 68)) {
+            if (tablero.hayBarrera((posInicial + i) % 69)) {
                 posicionFinal = (posInicial + i) - 1;
                 return posicionFinal;
             }
@@ -163,6 +163,9 @@ public class Ficha {
             //actualizamos el estado de la ficha
             casilla = posFinal;
             comible = !tablero.esSeguro(casilla);
+            for (PrintWriter writer : Servidor.getWriters()) {
+                writer.println("llega aqui");
+            }
 //            if (vaAComer(posFinal)) {
 //                System.out.println("El jugador ha comido una ficha y avanza 20 casillas");
 //                moverFicha(jugador, posFinal, 20, posPasillo);

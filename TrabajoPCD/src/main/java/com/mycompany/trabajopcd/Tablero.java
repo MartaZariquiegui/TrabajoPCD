@@ -14,13 +14,13 @@ import java.util.HashMap;
 public class Tablero {
     //en esta clase guardamos el estado de las casillas, en cuales hay barreras y la posicion actual de las fichas
     
-    private int[] casillas = new int[68];
+    private int[] casillas = new int[69];
     private HashMap<Ficha, Integer> posiciones = new HashMap<>();
     private int[] seguros = {5,12,17,22,29,34,39,46,51,56,63,68};
     private ArrayList<Integer> barreras = new ArrayList<>();
     
     public Tablero() {
-        for(int i=0; i<68; i++){
+        for(int i=0; i<69; i++){
             casillas[i] = 0;
         }
     }
