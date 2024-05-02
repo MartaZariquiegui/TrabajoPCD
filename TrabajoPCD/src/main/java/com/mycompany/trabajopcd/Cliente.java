@@ -38,7 +38,7 @@ public class Cliente {
             String nombre = sc.nextLine();
             pw.println(nombre);
 
-            while ((recibido = schilo.nextLine()) != null) {
+            while (((recibido = schilo.nextLine())!= null) && (Servidor.isPartidaTerminada()==false)){
                 if (recibido.equals(Servidor.getSolicitarDados())) {
                     System.out.println(recibido);
                     String salto = sc.nextLine();
