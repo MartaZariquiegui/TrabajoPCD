@@ -17,9 +17,7 @@ public class Ficha {
 
     private Color color;
     private int casilla = 0;
-    private boolean enCasa;
     private boolean ganar = false;
-    private boolean comible;
     private boolean estaPasillo;
     private int posPasillo;
     private int posAcumulada = 0;
@@ -29,8 +27,6 @@ public class Ficha {
     public Ficha(Color color, Tablero tablero) { // cada vez que creamos una ficha, está en casa y no se puede comer
         this.tablero = tablero;
         this.color = color;
-        this.enCasa = true;
-        this.comible = false;
         this.estaPasillo = false;
         this.posPasillo = 0;
     }
@@ -51,28 +47,12 @@ public class Ficha {
         this.casilla = casilla;
     }
 
-    public boolean isEnCasa() {
-        return enCasa;
-    }
-
-    public void setEnCasa(boolean enCasa) {
-        this.enCasa = enCasa;
-    }
-
     public boolean isGanar() {
         return ganar;
     }
 
     public void setGanar(boolean ganar) {
         this.ganar = ganar;
-    }
-
-    public boolean isComible() {
-        return comible;
-    }
-
-    public void setComible(boolean comible) {
-        this.comible = comible;
     }
 
     public boolean isEstaPasillo() {
@@ -103,30 +83,29 @@ public class Ficha {
     
     
     public void sacarFichaDeCasa(int numJugador) {
-        enCasa = false;
         switch (numJugador) {
-            case 1:
+            case 1 -> {
                 casilla = 5;
                 posAcumulada = 5;
                 tablero.ocuparCasilla(5, this);
-                break;
-            case 2:
+            }
+            case 2 -> {
                 casilla = 22;
                 posAcumulada = 22;
                 tablero.ocuparCasilla(22, this);
-                break;
-            case 3:
+            }
+            case 3 -> {
                 casilla = 39;
                 posAcumulada = 39;
                 tablero.ocuparCasilla(39, this);
-                break;
-            case 4:
+            }
+            case 4 -> {
                 casilla = 56;
                 posAcumulada = 56;
                 tablero.ocuparCasilla(56, this);
-                break;
-            default:
-                break;
+            }
+            default -> {
+            }
         }
     }
 
@@ -162,7 +141,6 @@ public class Ficha {
             tablero.quitarFichaDeCasilla(posInicial); //en la función no movemos el color porque se hace en ocuparCasilla
             //actualizamos el estado de la ficha
             casilla = posFinal;
-            comible = !tablero.esSeguro(casilla);
             
         } else if (estaPasillo == false && posAcumulada > jugador.getLimite()) { //si entra en pasillo
             for (PrintWriter writer : Servidor.getWriters()) {
@@ -201,30 +179,30 @@ public class Ficha {
 
     public int entra_pasillo(int numJugador, int nueva_posicion) {
         switch (numJugador) {
-            case 1:
+            case 1 -> {
                 if (nueva_posicion > 68) {
                     estaPasillo = true;
                     nueva_posicion = nueva_posicion - 68;
                 }
-                break;
-            case 2:
+            }
+            case 2 -> {
                 if (nueva_posicion > 17) {
                     estaPasillo = true;
                     nueva_posicion = nueva_posicion - 17;
                 }
-                break;
-            case 3:
+            }
+            case 3 -> {
                 if (nueva_posicion > 34) {
                     estaPasillo = true;
                     nueva_posicion = nueva_posicion - 34;
                 }
-                break;
-            case 4:
+            }
+            case 4 -> {
                 if (nueva_posicion > 51) {
                     estaPasillo = true;
                     nueva_posicion = nueva_posicion - 51;
                 }
-                break;
+            }
         }
         return nueva_posicion;
     }

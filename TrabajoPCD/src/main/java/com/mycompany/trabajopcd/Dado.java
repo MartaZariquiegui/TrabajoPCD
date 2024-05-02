@@ -31,7 +31,7 @@ public class Dado {
             if ((numeros[0]+numeros[1]==5) || (numeros[0]==5) || (numeros[1]==5)){
                 puedeSalir = true;
             }
-            System.out.println("En el dado 1 tenemos el numero: " + numeros[0] + ", y en el dado 2 el numero: " + numeros[1]);
+            System.out.println("En el primer dado tenemos el numero: " + numeros[0] + ", y en el segundo dado el numero: " + numeros[1]);
             
             if (numeros[0] != numeros[1]) {
                 return posiciones;
