@@ -126,7 +126,6 @@ public class Ficha {
                 tablero.ocuparCasilla(56, this);
                 break;
             default:
-                System.out.println("Jugador no válido");
                 break;
         }
     }
@@ -277,10 +276,6 @@ public class Ficha {
         }
         if ((Servidor.getCasas().get(i).casaVacia()) && (tirada != 0)) { //Aqui no seria if else ?? o else?? pq lo de ir a casa cuando la tirada es 0 ya lo incluimos en moverFicha
             Servidor.getFichas().get(i).moverFicha(jugador, Servidor.getFichas().get(i).getCasilla(), tirada, Servidor.getFichas().get(i).getPosPasillo());
-        }
-        for (PrintWriter writer : Servidor.getWriters()) {
-            writer.println();
-            writer.println("Siguiente turno");
         }
     }
 

@@ -37,17 +37,19 @@ public class Cliente {
             System.out.print(recibido);
             String nombre = sc.nextLine();
             pw.println(nombre);
-
-            while (((recibido = schilo.nextLine())!= null) && (Servidor.isPartidaTerminada()==false)){
-                if (recibido.equals(Servidor.getSolicitarDados())) {
-                    System.out.println(recibido);
-                    String salto = sc.nextLine();
-                    System.out.println(salto);
-                    int tirada = dado.tirada();
-                    pw.println(tirada);
-                    pw.println(dado.isPuedeSalir());
-                } else {
-                    System.out.println(recibido);
+            
+            while(Servidor.isPartidaTerminada()==false){
+                while ((recibido = schilo.nextLine())!= null){
+                    if (recibido.equals(Servidor.getSolicitarDados())) {
+                        System.out.println(recibido);
+                        String salto = sc.nextLine();
+                        System.out.println(salto);
+                        int tirada = dado.tirada();
+                        pw.println(tirada);
+                        pw.println(dado.isPuedeSalir());
+                    } else {
+                        System.out.println(recibido);
+                    }
                 }
             }
 
