@@ -42,11 +42,14 @@ public class Tablero {
 
     public void comerFichaTablero(int posicionFinal) {
         for (Ficha ficha : posiciones.keySet()) {
+            for (PrintWriter writer : Servidor.getWriters()) {
+                writer.println("La ficha esta en " + ficha.getCasilla());
+            }
             int pos = ficha.getCasilla();
             if (pos == posicionFinal) {
                 ficha.mandarFichaACasa(ficha);
-                posiciones.remove(ficha, posicionFinal);
-//                    posiciones.put(ficha, 0);
+//                posiciones.remove(ficha, posicionFinal);
+                posiciones.put(ficha, 0);
                 for (PrintWriter writer : Servidor.getWriters()) {
                     writer.println("La ficha " + ficha.getColor() + " ha sido comida");
                 }
