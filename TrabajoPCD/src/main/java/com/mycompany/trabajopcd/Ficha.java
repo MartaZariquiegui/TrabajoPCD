@@ -141,7 +141,7 @@ public class Ficha {
         return posicionFinal;
     }
 
-    public void moverFicha(Jugador jugador, int posInicial, int posiciones, int posPasillo) {
+    public void moverFicha(Jugador jugador, int posInicial, int posiciones) {
 
         for (PrintWriter writer : Servidor.getWriters()) {
             writer.println("Moviendo la ficha... ");
@@ -261,7 +261,7 @@ public class Ficha {
             }
         }
         if ((Servidor.getCasas().get(i).casaVacia()) && (tirada != 0)) {
-            Servidor.getFichas().get(i).moverFicha(jugador, Servidor.getFichas().get(i).getCasilla(), tirada, Servidor.getFichas().get(i).getPosPasillo());
+            Servidor.getFichas().get(i).moverFicha(jugador, Servidor.getFichas().get(i).getCasilla(),tirada);
         }
     }
 

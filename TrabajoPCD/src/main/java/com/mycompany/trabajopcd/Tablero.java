@@ -4,6 +4,7 @@
  */
 package com.mycompany.trabajopcd;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -25,10 +26,10 @@ public class Tablero {
         }
     }
 
-    public void meterClaveValor(Ficha ficha) {
-        posiciones = new HashMap<>();
-        posiciones.put(ficha, ficha.getCasilla());
-    }
+//    public void meterClaveValor(Ficha ficha) {
+//        posiciones = new HashMap<>();
+//        posiciones.put(ficha, ficha.getCasilla());
+//    }
 
     public boolean esSeguro(int casilla) {
         boolean seguro = false;
@@ -45,13 +46,13 @@ public class Tablero {
             for (Ficha ficha : posiciones.keySet()) {
                 int pos = ficha.getCasilla();
                 if (pos == posicionFinal) {
-                    if (!getColorDeUnaFicha(posicionFinal).equals(ficha.getColor())) {
-                        ficha.mandarFichaACasa(ficha);
-                        posiciones.remove(ficha, posicionFinal);
-                        posiciones.put(ficha, 0);
-                    }
+                    ficha.mandarFichaACasa(ficha);
+                    posiciones.remove(ficha, posicionFinal);
+//                    posiciones.put(ficha, 0);
                 }
-
+                for (PrintWriter writer : Servidor.getWriters()){
+                    writer.println("La ficha " + ficha.getColor() + " ha sido comida");
+                }
             }
         }
     }
@@ -66,6 +67,9 @@ public class Tablero {
             posiciones.put(ficha, casilla);
         } else if ((casillas[casilla] == 1) && (!esSeguro(casilla))) {
             //comerFicha
+            for (PrintWriter writer : Servidor.getWriters()){
+                writer.println("La ficha " + ficha.getColor() + " ha comido otra ficha");
+            }
             comerFichaTablero(casilla);
             posiciones.put(ficha, casilla);
         }
@@ -87,17 +91,17 @@ public class Tablero {
             barreras.remove(casilla);
         }
     }
-
-    public Color getColorDeUnaFicha(int pos) {
-        Color color = null;
-        for (Ficha ficha : posiciones.keySet()) {
-            for (int posicion : posiciones.values()) {
-                if (posicion == pos) {
-                    color = ficha.getColor();
-                }
-            }
-        }
-        return color;
-    }
+//
+//    public Color getColorDeUnaFicha(int pos) {
+//        Color color = null;
+//        for (Ficha ficha : posiciones.keySet()) {
+//            int posicion = ficha.getCasilla();
+//            if (posicion == pos) {
+//                color = ficha.getColor();
+//            }
+//
+//        }
+//        return color;
+//    }
 
 }
