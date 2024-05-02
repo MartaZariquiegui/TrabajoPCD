@@ -21,6 +21,8 @@ import java.util.Scanner;
 public class Servidor {
     
     private static String solicitarDados = "Pulse enter para tirar los dados: ";
+    private static boolean partidaTerminada = false;
+    
     private static List<Jugador> jugadores = Collections.synchronizedList(new ArrayList<>());
     private static List<Ficha> fichas = Collections.synchronizedList(new ArrayList<>());
     private static List<Casa> casas = Collections.synchronizedList(new ArrayList<>());
@@ -121,6 +123,14 @@ public class Servidor {
 
     public static String getSolicitarDados() {
         return solicitarDados;
+    }
+
+    public static boolean isPartidaTerminada() {
+        return partidaTerminada;
+    }
+
+    public static void setPartidaTerminada(boolean partidaTerminada) {
+        Servidor.partidaTerminada = partidaTerminada;
     }
   
 }

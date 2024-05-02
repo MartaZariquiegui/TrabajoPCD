@@ -60,7 +60,7 @@ public class HiloJuego implements Runnable {
                 writer.println("Se han conectado los 4 jugadores. Comienza la partida");
             }
 
-            while(true) {
+            while(Servidor.isPartidaTerminada()==false) {
                 for (int i = 0; i < Servidor.getJugadores().size(); i++) {
                     Jugador jugador = Servidor.getJugadores().get(i);
                     for (PrintWriter writer : Servidor.getWriters()) {
@@ -77,8 +77,18 @@ public class HiloJuego implements Runnable {
                     boolean puedeSalir = Boolean.parseBoolean(puedeSalirStr);
 
                     Servidor.getFichas().get(i).rondaJugador(jugador, puedeSalir, i, tirada);
+                    if(Servidor.isPartidaTerminada()){
+                        break;
+                    }
+                }
+                if(Servidor.isPartidaTerminada()){
+                    break;
                 }
             }
+            for (PrintWriter writer : Servidor.getWriters()) {
+                writer.println("Ha terminado la partida");
+            }
+            socket.close();
 
         } catch (IOException e) {
             System.err.println("IOException. Mensaje: " + e.getMessage());

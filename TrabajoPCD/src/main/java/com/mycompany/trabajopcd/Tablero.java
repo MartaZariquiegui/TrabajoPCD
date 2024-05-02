@@ -16,7 +16,7 @@ public class Tablero {
     
     private int[] casillas = new int[68];
     private HashMap<Ficha, Integer> posiciones = new HashMap<>();
-    private int[] seguros = {4,11,16,21,28,33,38,45,50,55,62,67};
+    private int[] seguros = {5,12,17,22,29,34,39,46,51,56,63,68};
     private ArrayList<Integer> barreras = new ArrayList<>();
     
     public Tablero() {
@@ -88,8 +88,6 @@ public class Tablero {
             //comerFicha
             comerFichaTablero(casilla);
             posiciones.put(ficha, casilla);
-        }else{
-            System.out.println("No se puede ocupar esta casilla");
         }
     }
     

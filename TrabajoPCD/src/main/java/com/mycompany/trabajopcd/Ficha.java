@@ -184,6 +184,7 @@ public class Ficha {
         if (estaPasillo && posPasillo >= 8) {
             for (PrintWriter writer : Servidor.getWriters()) {
                 writer.println("¡Enhorabuena jugador " + jugador.getNombre() + " has ganado!");
+                Servidor.setPartidaTerminada(true);
             }
         } else if (estaPasillo && posPasillo < 8) {
             for (PrintWriter writer : Servidor.getWriters()) {
