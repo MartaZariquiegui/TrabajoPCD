@@ -93,7 +93,7 @@ public class HiloJuego implements Runnable {
 
         } catch (IOException e) {
             System.err.println("IOException. Mensaje: " + e.getMessage());
-            e.printStackTrace();
+            e.printStackTrace(System.err);
             System.exit(1);
         }
     }

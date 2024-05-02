@@ -50,11 +50,11 @@ public class Servidor {
             hiloJuego.join();
         }catch (IOException e) {
             System.err.println("IOException. Mensaje: " + e.getMessage());
-            e.printStackTrace();
+            e.printStackTrace(System.err);
             System.exit(1);
         }catch (InterruptedException ex) {
             System.err.println("InterruptedException. Mensaje: " + ex.getMessage());
-            ex.printStackTrace();
+            ex.printStackTrace(System.err);
             System.exit(1);
         }
         

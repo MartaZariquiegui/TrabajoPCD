@@ -41,21 +41,22 @@ public class Tablero {
     }
     
    
-    public boolean comerFichaTablero(int posicionFinal) {
-        boolean comer = false;
+    public void comerFichaTablero(int posicionFinal) {
+        //boolean comer = false;
         if(getEstadoCasilla(posicionFinal) == 1 && !esSeguro(posicionFinal) ){  //lo compruebo dos veces??? pq en ocuparCasilla tambien lo compruebo, pero no lo puedo quitar pq en moverFicha tambien utilizo sin comprobar
             for(Ficha ficha : posiciones.keySet()){
                 for(int pos : posiciones.values()){
                     if (pos == posicionFinal){
                         if(!getColorDeUnaFicha(posicionFinal).equals(ficha.getColor())){
                             ficha.mandarFichaACasa(ficha);
-                            comer = true;
+                            posiciones.remove(ficha, posicionFinal);
+                            posiciones.put(ficha, 0);
+                            //comer = true;
                         }
                     }
                 }
             }
         }
-        return comer;
     }
     
     
