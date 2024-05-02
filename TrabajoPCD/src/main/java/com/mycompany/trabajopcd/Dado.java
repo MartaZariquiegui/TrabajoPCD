@@ -31,19 +31,17 @@ public class Dado {
             if ((numeros[0]+numeros[1]==5) || (numeros[0]==5) || (numeros[1]==5)){
                 puedeSalir = true;
             }
-            for (PrintWriter writer : Servidor.getWriters()) {
-                writer.println("En el dado 1 tenemos el numero: " + numeros[0] + ", y en el dado 2 el numero: " + numeros[1]);
-            }
+            System.out.println("En el dado 1 tenemos el numero: " + numeros[0] + ", y en el dado 2 el numero: " + numeros[1]);
+            
             if (numeros[0] != numeros[1]) {
                 return posiciones;
             } else {
-                for (PrintWriter writer : Servidor.getWriters()) {
-                    writer.println("Como los numeros en ambos dados son iguales se lanza otra vez");
-                }
+                System.out.println("Como los numeros en ambos dados son iguales se lanza otra vez");
+                
             }
         }
         for (PrintWriter writer : Servidor.getWriters()) {
-            writer.println("Tras tres tiradas con numeros repetidos la ficha se va a casa");
+            System.out.println("Tras tres tiradas con numeros repetidos la ficha se va a casa");
         }
         return 0;
     }
