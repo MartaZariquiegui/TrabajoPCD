@@ -42,6 +42,7 @@ public class Cliente {
                 if (recibido.equals(Servidor.getSolicitarDados())) {
                     System.out.println(recibido);
                     String salto = sc.nextLine();
+                    System.out.println(salto);
                     int tirada = dado.tirada();
                     pw.println(tirada);
                     pw.println(dado.isPuedeSalir());
@@ -55,7 +56,6 @@ public class Cliente {
             e.printStackTrace();
             System.exit(1);
         }
-
     }
 
 }

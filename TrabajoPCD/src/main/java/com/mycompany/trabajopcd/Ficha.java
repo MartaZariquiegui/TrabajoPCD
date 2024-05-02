@@ -148,7 +148,7 @@ public class Ficha {
             writer.println("Moviendo la ficha... ");
         }
 
-        int posFinal = nuevaPos(posInicial, posiciones);
+        int posFinal = nuevaPos(posInicial, posiciones)%68;
         posAcumulada = nuevaPos(posAcumulada, posiciones);
 
         if (estaPasillo == false && posAcumulada < jugador.getLimite()) {
@@ -182,9 +182,13 @@ public class Ficha {
         }
 
         if (estaPasillo && posPasillo >= 8) {
-            System.out.println("¡Enhorabuena jugador " + jugador.getNombre() + " has ganado!");
+            for (PrintWriter writer : Servidor.getWriters()) {
+                writer.println("¡Enhorabuena jugador " + jugador.getNombre() + " has ganado!");
+            }
         } else if (estaPasillo && posPasillo < 8) {
-            System.out.println(jugador.getNombre() + " te faltan " + (8 - posPasillo) + " casillas para ganar");
+            for (PrintWriter writer : Servidor.getWriters()) {
+                writer.println(jugador.getNombre() + " te faltan " + (8 - posPasillo) + " casillas para ganar");
+            }
         } else { //NO es mejor poner directmente mostrarDatos() ???
             for (PrintWriter writer : Servidor.getWriters()) {
                 writer.println("Color: " + getColor());
