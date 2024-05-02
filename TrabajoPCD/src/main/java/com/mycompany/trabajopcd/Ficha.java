@@ -12,7 +12,7 @@ import java.io.PrintWriter;
  */
 public class Ficha {
 
-    // en esta clase actualizamos el estado de las fichas, si estan en casa o no, su posicion y si pueden ser comidas
+    //En esta clase actualizamos el estado de las fichas, si estan en casa o no, su posicion y si pueden ser comidas
     private Tablero tablero;
 
     private Color color;
@@ -26,7 +26,7 @@ public class Ficha {
 
     private Casa casa;
 
-    public Ficha(Color color, Tablero tablero) { // cada vez que creamos una ficha está en casa y no se puede comer
+    public Ficha(Color color, Tablero tablero) { // cada vez que creamos una ficha, está en casa y no se puede comer
         this.tablero = tablero;
         this.color = color;
         this.enCasa = true;
@@ -102,28 +102,8 @@ public class Ficha {
     }
     
     
-
-    //Creo que no la utilizamos y se puede borrar
-    /*
-    public Ficha getFichaDeCasilla(int casillaOcupada) {
-        Ficha fichaAux = null;
-        if (tablero.getEstadoCasilla(casillaOcupada) == 1) {
-            //Ya habremos comprobado antes que es esa casilla hay una unica ficha, porque es para la funcion comerFicha
-            for (int i = 1; i <= 68; i++) {
-                if (casilla == casillaOcupada) {
-                    fichaAux = new Ficha(tablero.getColorDeUnaFicha(casillaOcupada), tablero);
-                    fichaAux.setCasilla(casillaOcupada);
-                    fichaAux.setComible(true);
-                    fichaAux.setEnCasa(false);
-                    break;
-                }
-            }
-        }
-        return fichaAux;
-    }*/
     public void sacarFichaDeCasa(int numJugador) {
         enCasa = false;
-        //casa.eliminarDeCasa(this);
         switch (numJugador) {
             case 1:
                 casilla = 5;
@@ -175,7 +155,7 @@ public class Ficha {
                 writer.println("No esta en el pasillo ");
             }
             if (posiciones == 0) {
-                mandarFichaACasa(this);//Significa que habra sacado 3 veces seguidad dados dobles.
+                mandarFichaACasa(this);//Significa que habra sacado 3 veces seguidas dados dobles.
             }
             //actualizamos el estado del tablero
             tablero.ocuparCasilla(posFinal, this); //ya actualiza la posicion del color
@@ -183,13 +163,7 @@ public class Ficha {
             //actualizamos el estado de la ficha
             casilla = posFinal;
             comible = !tablero.esSeguro(casilla);
-            for (PrintWriter writer : Servidor.getWriters()) {
-                writer.println("llega aqui");
-            }
-//            if (vaAComer(posFinal)) {
-//                System.out.println("El jugador ha comido una ficha y avanza 20 casillas");
-//                moverFicha(jugador, posFinal, 20, posPasillo);
-//            }
+            
         } else if (estaPasillo == false && posAcumulada > jugador.getLimite()) { //si entra en pasillo
             for (PrintWriter writer : Servidor.getWriters()) {
                 writer.println("Entra al pasillo ");
@@ -212,19 +186,8 @@ public class Ficha {
             for (PrintWriter writer : Servidor.getWriters()) {
                 writer.println(jugador.getNombre() + " te faltan " + (8 - posPasillo) + " casillas para ganar");
             }
-        } else { //NO es mejor poner directmente mostrarDatos() ???
-            for (PrintWriter writer : Servidor.getWriters()) {
-                writer.println("Color: " + getColor());
-            }
-            if (casilla == 0) {
-                for (PrintWriter writer : Servidor.getWriters()) {
-                    writer.println("Casilla: 68");
-                }
-            } else {
-                for (PrintWriter writer : Servidor.getWriters()) {
-                    writer.println("Casilla: " + casilla);
-                }
-            }
+        } else { 
+            mostrarDatos();
         }
     }
 
@@ -272,11 +235,11 @@ public class Ficha {
         }
         if (casilla == 0) {
             for (PrintWriter writer : Servidor.getWriters()) {
-                writer.println("Casilla: La ficha está en casa");
+                writer.println("Casilla: 68");
             }
         } else {
             for (PrintWriter writer : Servidor.getWriters()) {
-                writer.println("Casilla: " + casilla);
+                writer.println("Casilla: " + casilla + "\n");
             }
         }
     }
@@ -289,15 +252,15 @@ public class Ficha {
                 Servidor.getCasas().get(i).eliminarDeCasa(Servidor.getFichas().get(i));
                 tirada -= 5;
                 for (PrintWriter writer : Servidor.getWriters()) {
-                    writer.println(jugador.getNombre() + " ha sacado su ficha de casa.");
+                    writer.println(jugador.getNombre() + " ha sacado su ficha de casa.\n");
                 }
             } else {
                 for (PrintWriter writer : Servidor.getWriters()) {
-                    writer.println(jugador.getNombre() + " no ha conseguido sacar su ficha de casa.");
+                    writer.println(jugador.getNombre() + " no ha conseguido sacar su ficha de casa.\n");
                 }
             }
         }
-        if ((Servidor.getCasas().get(i).casaVacia()) && (tirada != 0)) { //Aqui no seria if else ?? o else?? pq lo de ir a casa cuando la tirada es 0 ya lo incluimos en moverFicha
+        if ((Servidor.getCasas().get(i).casaVacia()) && (tirada != 0)) {
             Servidor.getFichas().get(i).moverFicha(jugador, Servidor.getFichas().get(i).getCasilla(), tirada, Servidor.getFichas().get(i).getPosPasillo());
         }
     }

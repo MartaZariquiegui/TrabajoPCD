@@ -18,7 +18,6 @@ import java.util.Scanner;
  */
 public class HiloJuego implements Runnable {
 
-    //private ServerSocket socket;
     private String name;
     private ServerSocket socket;
     private Scanner in;
@@ -28,10 +27,7 @@ public class HiloJuego implements Runnable {
         this.socket = socket;
     }
 
-    //ana
-//    public HiloJuego(Socket socket) {
-//        this.socket = socket;
-//    }
+    
     @Override
     public void run() {
 

@@ -49,7 +49,7 @@ public class Cliente {
                     } else {
                         System.out.println(recibido);
                     }
-                    if(Servidor.isPartidaTerminada()==true){
+                    if (Servidor.isPartidaTerminada() == true) {
                         break;
                     }
                 }

@@ -14,7 +14,6 @@ public class Casa {
     private ArrayList<Ficha> fichasEnCasa;
     private int numFichas;
     private Color color;
-    //private Tablero tablero;
 
     public Casa(int numFichas, Color color, Tablero tablero) {
         this.numFichas = numFichas;

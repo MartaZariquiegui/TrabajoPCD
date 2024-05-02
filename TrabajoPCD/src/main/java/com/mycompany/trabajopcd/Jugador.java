@@ -15,7 +15,7 @@ public class Jugador {
     private Color color;
     private Ficha ficha;
     private Tablero tablero;
-    private int[] limites = {68,85,102,119}; //limites de casillas antes de entrar al pasillo como si el parchis no volviese al uno despues del 68
+    private int[] limites = {68,85,102,119};
 
     public Jugador(String nombre, int numero, Color color, Ficha ficha, Tablero tablero) {
         this.nombre = nombre;

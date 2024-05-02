@@ -12,7 +12,7 @@ import java.util.HashMap;
  * @author martazariquiegui
  */
 public class Tablero {
-    //en esta clase guardamos el estado de las casillas, en cuales hay barreras y la posicion actual de las fichas
+    //En esta clase guardamos el estado de las casillas, en cuales hay barreras y la posicion actual de las fichas
 
     private int[] casillas = new int[69];
     private HashMap<Ficha, Integer> posiciones = new HashMap<>();
@@ -41,8 +41,7 @@ public class Tablero {
     }
 
     public void comerFichaTablero(int posicionFinal) {
-        //boolean comer = false;
-        if (getEstadoCasilla(posicionFinal) == 1 && !esSeguro(posicionFinal)) {  //lo compruebo dos veces??? pq en ocuparCasilla tambien lo compruebo, pero no lo puedo quitar pq en moverFicha tambien utilizo sin comprobar
+        if (getEstadoCasilla(posicionFinal) == 1 && !esSeguro(posicionFinal)) {
             for (Ficha ficha : posiciones.keySet()) {
                 int pos = ficha.getCasilla();
                 if (pos == posicionFinal) {
@@ -50,7 +49,6 @@ public class Tablero {
                         ficha.mandarFichaACasa(ficha);
                         posiciones.remove(ficha, posicionFinal);
                         posiciones.put(ficha, 0);
-                        //comer = true;
                     }
                 }
 
