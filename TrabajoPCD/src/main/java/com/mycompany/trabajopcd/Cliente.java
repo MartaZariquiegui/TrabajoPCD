@@ -38,14 +38,15 @@ public class Cliente {
             String nombre = sc.nextLine();
             pw.println(nombre);
 
-            
             while ((recibido = schilo.nextLine()) != null) {
-                System.out.println(recibido);
                 if (recibido.equals(Servidor.getSolicitarDados())) {
+                    System.out.println(recibido);
                     String salto = sc.nextLine();
                     int tirada = dado.tirada();
                     pw.println(tirada);
                     pw.println(dado.isPuedeSalir());
+                } else {
+                    System.out.println(recibido);
                 }
             }
 

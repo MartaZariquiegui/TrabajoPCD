@@ -22,6 +22,7 @@ public class Ficha {
     private boolean comible;
     private boolean estaPasillo;
     private int posPasillo;
+    private int posAcumulada = 0;
 
     private Casa casa;
 
@@ -81,7 +82,7 @@ public class Ficha {
     public void setPosPasillo(int posPasillo) {
         this.posPasillo = posPasillo;
     }
-    
+
     //Creo que no la utilizamos y se puede borrar
     /*
     public Ficha getFichaDeCasilla(int casillaOcupada) {
@@ -100,26 +101,28 @@ public class Ficha {
         }
         return fichaAux;
     }*/
-    
-
     public void sacarFichaDeCasa(int numJugador) {
         enCasa = false;
         //casa.eliminarDeCasa(this);
         switch (numJugador) {
             case 1:
                 casilla = 5;
+                posAcumulada = 5;
                 tablero.ocuparCasilla(5, this);
                 break;
             case 2:
                 casilla = 22;
+                posAcumulada = 22;
                 tablero.ocuparCasilla(22, this);
                 break;
             case 3:
                 casilla = 39;
+                posAcumulada = 39;
                 tablero.ocuparCasilla(39, this);
                 break;
             case 4:
                 casilla = 56;
+                posAcumulada = 56;
                 tablero.ocuparCasilla(56, this);
                 break;
             default:
@@ -133,10 +136,10 @@ public class Ficha {
         for (int i = 1; i <= posiciones; i++) {
             if (tablero.hayBarrera((posInicial + i) % 68)) {
                 posicionFinal = (posInicial + i) - 1;
-                return posicionFinal % 68;
+                return posicionFinal;
             }
         }
-        return posicionFinal % 68;
+        return posicionFinal;
     }
 
     public void moverFicha(Jugador jugador, int posInicial, int posiciones, int posPasillo) {
@@ -146,8 +149,12 @@ public class Ficha {
         }
 
         int posFinal = nuevaPos(posInicial, posiciones);
+        posAcumulada = nuevaPos(posAcumulada, posiciones);
 
-        if (estaPasillo == false && posFinal < jugador.getLimite()) {
+        if (estaPasillo == false && posAcumulada < jugador.getLimite()) {
+            for (PrintWriter writer : Servidor.getWriters()) {
+                writer.println("No esta en el pasillo ");
+            }
             if (posiciones == 0) {
                 mandarFichaACasa(this);//Significa que habra sacado 3 veces seguidad dados dobles.
             }
@@ -161,10 +168,16 @@ public class Ficha {
 //                System.out.println("El jugador ha comido una ficha y avanza 20 casillas");
 //                moverFicha(jugador, posFinal, 20, posPasillo);
 //            }
-        } else if (estaPasillo == false && posFinal > jugador.getLimite()) { //si esta en pasillo
+        } else if (estaPasillo == false && posAcumulada > jugador.getLimite()) { //si entra en pasillo
+            for (PrintWriter writer : Servidor.getWriters()) {
+                writer.println("Entra al pasillo ");
+            }
             posPasillo = entra_pasillo(jugador.getNumero(), posFinal);
             estaPasillo = true;
         } else {
+            for (PrintWriter writer : Servidor.getWriters()) {
+                writer.println("Esta en el pasillo ");
+            }
             posPasillo += posiciones;
         }
 
@@ -178,7 +191,7 @@ public class Ficha {
             }
             if (casilla == 0) {
                 for (PrintWriter writer : Servidor.getWriters()) {
-                    writer.println("Casilla: La ficha está en casa");
+                    writer.println("Casilla: 68");
                 }
             } else {
                 for (PrintWriter writer : Servidor.getWriters()) {
@@ -199,27 +212,27 @@ public class Ficha {
     public int entra_pasillo(int numJugador, int nueva_posicion) {
         switch (numJugador) {
             case 1:
-                if (nueva_posicion > 67) {
+                if (nueva_posicion > 68) {
                     estaPasillo = true;
-                    nueva_posicion = nueva_posicion - 67;
+                    nueva_posicion = nueva_posicion - 68;
                 }
                 break;
             case 2:
-                if (nueva_posicion > 50) {
+                if (nueva_posicion > 17) {
                     estaPasillo = true;
-                    nueva_posicion = nueva_posicion - 50;
+                    nueva_posicion = nueva_posicion - 17;
                 }
                 break;
             case 3:
-                if (nueva_posicion > 33) {
+                if (nueva_posicion > 34) {
                     estaPasillo = true;
-                    nueva_posicion = nueva_posicion - 33;
+                    nueva_posicion = nueva_posicion - 34;
                 }
                 break;
             case 4:
-                if (nueva_posicion > 16) {
+                if (nueva_posicion > 51) {
                     estaPasillo = true;
-                    nueva_posicion = nueva_posicion - 16;
+                    nueva_posicion = nueva_posicion - 51;
                 }
                 break;
         }
