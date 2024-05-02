@@ -20,7 +20,7 @@ import java.util.Scanner;
  */
 public class Servidor {
     
-    private static String solicitarDados = "Pulse enter para tirar los dados: ";
+    private static String solicitarDados = "Pulse ENTER para tirar los dados: ";
     private static boolean partidaTerminada = false;
     
     private static List<Jugador> jugadores = Collections.synchronizedList(new ArrayList<>());

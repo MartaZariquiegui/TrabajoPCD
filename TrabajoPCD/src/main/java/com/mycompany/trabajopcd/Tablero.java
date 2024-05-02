@@ -26,10 +26,6 @@ public class Tablero {
         }
     }
 
-//    public void meterClaveValor(Ficha ficha) {
-//        posiciones = new HashMap<>();
-//        posiciones.put(ficha, ficha.getCasilla());
-//    }
     public boolean esSeguro(int casilla) {
         boolean seguro = false;
         for (int i = 0; i < seguros.length; i++) {
@@ -43,7 +39,7 @@ public class Tablero {
     public void comerFichaTablero(int posicionFinal) {
         for (Ficha ficha : posiciones.keySet()) {
             for (PrintWriter writer : Servidor.getWriters()) {
-                writer.println("La ficha esta en " + ficha.getCasilla());
+                writer.println("La ficha está en " + ficha.getCasilla());
             }
             int pos = ficha.getCasilla();
             if (pos == posicionFinal) {
@@ -92,17 +88,4 @@ public class Tablero {
             barreras.remove(casilla);
         }
     }
-//
-//    public Color getColorDeUnaFicha(int pos) {
-//        Color color = null;
-//        for (Ficha ficha : posiciones.keySet()) {
-//            int posicion = ficha.getCasilla();
-//            if (posicion == pos) {
-//                color = ficha.getColor();
-//            }
-//
-//        }
-//        return color;
-//    }
-
 }

@@ -131,7 +131,7 @@ public class Ficha {
 
         if (estaPasillo == false && posAcumulada < jugador.getLimite()) {
             for (PrintWriter writer : Servidor.getWriters()) {
-                writer.println("No esta en el pasillo ");
+                writer.println("No está en el pasillo ");
             }
             if (posiciones == 0) {
                 mandarFichaACasa(this);//Significa que habra sacado 3 veces seguidas dados dobles.
@@ -150,7 +150,7 @@ public class Ficha {
             estaPasillo = true;
         } else {
             for (PrintWriter writer : Servidor.getWriters()) {
-                writer.println("Esta en el pasillo ");
+                writer.println("Está en el pasillo ");
             }
             posPasillo += posiciones;
         }
@@ -162,7 +162,7 @@ public class Ficha {
             Servidor.setPartidaTerminada(true);
         } else if (estaPasillo && posPasillo < 8) {
             for (PrintWriter writer : Servidor.getWriters()) {
-                writer.println(jugador.getNombre() + " te faltan " + (8 - posPasillo) + " casillas para ganar");
+                writer.println(jugador.getNombre() + " te faltan " + (8 - posPasillo) + " casillas para ganar\n");
             }
         } else { 
             mostrarDatos();
