@@ -30,7 +30,6 @@ public class Tablero {
 //        posiciones = new HashMap<>();
 //        posiciones.put(ficha, ficha.getCasilla());
 //    }
-
     public boolean esSeguro(int casilla) {
         boolean seguro = false;
         for (int i = 0; i < seguros.length; i++) {
@@ -42,19 +41,18 @@ public class Tablero {
     }
 
     public void comerFichaTablero(int posicionFinal) {
-        if (getEstadoCasilla(posicionFinal) == 1 && !esSeguro(posicionFinal)) {
-            for (Ficha ficha : posiciones.keySet()) {
-                int pos = ficha.getCasilla();
-                if (pos == posicionFinal) {
-                    ficha.mandarFichaACasa(ficha);
-                    posiciones.remove(ficha, posicionFinal);
+        for (Ficha ficha : posiciones.keySet()) {
+            int pos = ficha.getCasilla();
+            if (pos == posicionFinal) {
+                ficha.mandarFichaACasa(ficha);
+                posiciones.remove(ficha, posicionFinal);
 //                    posiciones.put(ficha, 0);
-                }
-                for (PrintWriter writer : Servidor.getWriters()){
+                for (PrintWriter writer : Servidor.getWriters()) {
                     writer.println("La ficha " + ficha.getColor() + " ha sido comida");
                 }
             }
         }
+
     }
 
     public void ocuparCasilla(int casilla, Ficha ficha) {
@@ -67,7 +65,7 @@ public class Tablero {
             posiciones.put(ficha, casilla);
         } else if ((casillas[casilla] == 1) && (!esSeguro(casilla))) {
             //comerFicha
-            for (PrintWriter writer : Servidor.getWriters()){
+            for (PrintWriter writer : Servidor.getWriters()) {
                 writer.println("La ficha " + ficha.getColor() + " ha comido otra ficha");
             }
             comerFichaTablero(casilla);
