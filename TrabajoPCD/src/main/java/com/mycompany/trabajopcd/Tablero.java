@@ -44,7 +44,6 @@ public class Tablero {
             int pos = ficha.getCasilla();
             if (pos == posicionFinal) {
                 ficha.mandarFichaACasa(ficha);
-//                posiciones.remove(ficha, posicionFinal);
                 posiciones.put(ficha, 0);
                 for (PrintWriter writer : Servidor.getWriters()) {
                     writer.println("La ficha " + ficha.getColor() + " ha sido comida");

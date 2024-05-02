@@ -46,9 +46,10 @@ public class HiloJuego implements Runnable {
                 out.println("Introduce tu nombre: ");
                 String nombre = in.nextLine();
                 int num = i + 1;
-                Ficha ficha = new Ficha(Servidor.getColores().get(i), tablero);
+                Casa casa = new Casa(1, Servidor.getColores().get(i), tablero);
+                Servidor.getCasas().add(casa);
+                Ficha ficha = new Ficha(Servidor.getColores().get(i), tablero, casa);
                 Servidor.getFichas().add(ficha);
-                Servidor.getCasas().add(new Casa(1, Servidor.getColores().get(i), tablero));
                 Jugador jugador = new Jugador(nombre, num, Servidor.getColores().get(i), ficha, tablero);
                 Servidor.getJugadores().add(jugador);
             }

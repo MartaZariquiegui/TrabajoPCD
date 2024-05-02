@@ -24,9 +24,10 @@ public class Ficha {
 
     private Casa casa;
 
-    public Ficha(Color color, Tablero tablero) { // cada vez que creamos una ficha, está en casa y no se puede comer
+    public Ficha(Color color, Tablero tablero, Casa casa) { // cada vez que creamos una ficha, está en casa y no se puede comer
         this.tablero = tablero;
         this.color = color;
+        this.casa = casa;
         this.estaPasillo = false;
         this.posPasillo = 0;
     }
